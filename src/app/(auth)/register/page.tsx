@@ -97,7 +97,7 @@ export default function FormComponent() {
 
     console.log("Registration data:", formData);
     alert("Registration successful!");
-    router.push("/create");
+    router.push("/login");
 
     setIsLoading(false);
     setFormData({ username: "", email: "", password: "" });

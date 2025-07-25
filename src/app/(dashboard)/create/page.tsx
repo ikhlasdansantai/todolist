@@ -93,7 +93,7 @@ export default function CreateList() {
             </Card>
           ))
         ) : (
-          <p>Gak ada brow</p>
+          <p>No todo active, let's add one</p>
         )}
       </section>
     </section>

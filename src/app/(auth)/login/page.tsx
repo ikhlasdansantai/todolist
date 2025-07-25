@@ -5,6 +5,7 @@ import { Eye, EyeOff, Lock, ArrowRight, LogIn, User } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const BASE_URL = "http://94.74.86.174:8080/api/";
 
@@ -33,6 +34,7 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
@@ -90,8 +92,8 @@ export default function LoginPage() {
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
       const data = await res.json();
-      console.log("API Response:", data);
       localStorage.setItem("token", data.data.token as string);
+      router.push("/login");
     } catch (error: unknown) {
       console.error("Login error:", error);
 
