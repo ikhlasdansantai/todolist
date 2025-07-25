@@ -2,6 +2,8 @@
 
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Eye, EyeOff, User, Mail, Lock, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, ChangeEvent, FormEvent } from "react";
 
 interface FormData {
@@ -28,6 +30,7 @@ export default function FormComponent() {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -94,6 +97,7 @@ export default function FormComponent() {
 
     console.log("Registration data:", formData);
     alert("Registration successful!");
+    router.push("/create");
 
     setIsLoading(false);
     setFormData({ username: "", email: "", password: "" });
@@ -123,7 +127,6 @@ export default function FormComponent() {
               {errors.username && <p className="text-sm text-red-600">{errors.username}</p>}
             </div>
 
-            {/* Email Field */}
             <div className="space-y-2 text-slate-800">
               <label htmlFor="email" className="text-sm font-medium text-slate-700">
                 Email Address
@@ -143,7 +146,6 @@ export default function FormComponent() {
               {errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
             </div>
 
-            {/* Password Field */}
             <div className="space-y-2 text-slate-800">
               <label htmlFor="password" className="text-sm font-medium text-slate-700">
                 Password
@@ -166,7 +168,6 @@ export default function FormComponent() {
               {errors.password && <p className="text-sm text-red-600">{errors.password}</p>}
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={isLoading}
@@ -186,9 +187,9 @@ export default function FormComponent() {
           <CardFooter className="mt-6 text-center">
             <p className="text-sm text-slate-600">
               Already have an account?{" "}
-              <a href="#" className="text-blue-600 hover:text-blue-700 font-medium transition-colors">
-                Sign in
-              </a>
+              <Link href="/register" className="text-blue-600 hover:text-blue-700 font-medium transition-colors">
+                Sign In
+              </Link>
             </p>
           </CardFooter>
         </form>
